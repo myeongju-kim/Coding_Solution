@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="main.css" rel="stylesheet" type="text/css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script>
+            $.ajax({
+                url:'/analysis/may.csv',
+                dataType: 'text',
+            }).done(successFunction);
+
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <img id="title" src="image/main_icon.png">
+            <text id="title_text">coding. jumping</text>
+            <div class="mid_header">
+                <button class="btn" id="analysis">알고리즘 분석</button>
+                <button class="btn" id="study">스터디 그룹</button>
+                <button class="btn" id="company" onclick="location.href='company.html'">합격 예측</button>
+            </div>
+            <text id="my_id">mjoo1106</text>
+            <div id="grapic">
+                <div style="width:150px; height:150px;">
+                    <canvas id="myChart" style="width:150px; height:150px;"></canvas>
+                </div>
+                <img id="coding_image" src="image/login_homeimg.png">
+                <text id="g_text"><br>6월에는 그래프가 가장 인기가 많네요!<br>
+                혹시... 기업에서 그래프가 출제되는건 아닐지..??</text>
+
+            </div>
+        </div>
+        <img id="positioning" src="image/positioning.png">
+        <script>
+          
+        </script>
+    </body>
+
+    
+
+</html>
