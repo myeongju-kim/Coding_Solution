@@ -78,3 +78,14 @@
     top:100px;
     left:17%;
 }
+#test{
+    position:relative;
+    left:270px;
+    float:left;
+}
+#test2{
+    position:relative;
+    top:35px;
+    left:380px;
+    float:left;
+}
