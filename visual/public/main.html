@@ -3,6 +3,7 @@
     <head>
         <link href="main.css" rel="stylesheet" type="text/css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.js"></script>
     </head>
     <body>
         <div class="header">
@@ -16,124 +17,123 @@
             <text id="my_id">mjoo1106</text>
             <div id="grapic">
                 <div id="test" style="width:300px; height:300px;">
-                    <canvas id="myChart" ></canvas> 
+                    <canvas id="myChart"></canvas> 
                 </div>
                 <div id="test2" style="width:250px; height:250px;">
                     <canvas id="myChart2" ></canvas>   
                 </div>
                 <img id="coding_image" src="image/login_homeimg.png">
                 <text id="g_text"><br>5월에는 시뮬레이션, 수학 문제가 가장 인기가 많네요!<br>
-                4월에는 등장하지 않았던 문자열 문제도 보이네요!</text>
+                4월과 비교했을 때 "그래프 탐색"이 없어지고 "문자열" 문제가 새롭게 등장했어요.</text>
 
             </div>
         </div>
 
         <img id="positioning" src="image/positioning.png">
         <script type="text/javascript">
-            var context = document
-                .getElementById('myChart')
-                .getContext('2d');
-            var myChart = new Chart(context, {
-                type: 'doughnut', // 차트의 형태
-                data: { // 차트에 들어갈 데이터
-                    labels:["구현", "수학", "사칙연산", "그래프 이론", "자료 구조", "문자열", "DP"],
-                    datasets: [{ 
-                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                            data: [
-                                223313,207147,108169,62522,59980,52726,48256 //x축 label에 대응되는 데이터 값
-                            ],
-                            backgroundColor: [
-                                //색상
-                                'rgba(255, 99, 132, 0.7)',
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(255, 206, 86, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(153, 102, 255, 0.7)',
-                                'rgba(255, 159, 64, 0.7)',
-                                'rgba(128, 159, 64, 0.7)',
-                            ],
-                            borderColor: [
-                                //경계선 색상
-                                'rgba(255, 99, 132, 0.7)',
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(255, 206, 86, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(153, 102, 255, 0.7)',
-                                'rgba(255, 159, 64, 0.7)',                         
-                                'rgba(128, 159, 64, 0.7)',
-                            ],
-                            borderWidth: 1 //경계선 굵기
-                        }
-                    ]
+            $.ajax({
+                url: 'http://localhost:8000/trend',
+                type: 'GET',
+                data: {'cur':5,
+                        'bef':4
                 },
-                options:{
-                    legend:{
-                        position:'bottom',
-                        labels:{
-                            fontSize:16,
-                            boxWidth:1,
-                            fontColor:'white'
+                dataType:"json",
+                success: (res) => {
+                    var context = document
+                    .getElementById('myChart')
+                    .getContext('2d');
+                    var myChart = new Chart(context, {
+                    type: 'doughnut', // 차트의 형태
+                    data: { // 차트에 들어갈 데이터
+                        labels:[res[0]['type'], res[1]['type'], res[2]['type'], res[3]['type'], res[4]['type'], res[5]['type']],
+                        datasets: [{ 
+                                fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                                data: [
+                                    res[0]['try'], res[1]['try'], res[2]['try'], res[3]['try'], res[4]['try'], res[5]['try']
+                                ],
+                                backgroundColor: [
+                                    //색상
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',
+                                ],
+                                borderColor: [
+                                    //경계선 색상
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',                         
+                                ],
+                                borderWidth: 1 //경계선 굵기
+                            }
+                        ]
+                    },
+                    options:{
+                        legend:{
+                            position:'bottom',
+                            labels:{
+                                fontSize:16,
+                                boxWidth:1,
+                                fontColor:'white'
+                            }
                         }
                     }
-                }
-            });   
-            var context2 = document
-                .getElementById('myChart2')
-                .getContext('2d');
-            var myChart2 = new Chart(context2, {
-                type: 'doughnut', // 차트의 형태
-                data: { // 차트에 들어갈 데이터
-                    labels:["구현", "수학", "사칙연산", "그래프 이론", "그래프 탐색", "자료 구조", "DP"],
-                    datasets: [
-                        { //데이터
-                            /*
-                            04,구현,557489
-                            04,수학,487943
-                            04,사칙연산,266794
-                            04,그래프 이론,163517
-                            04,그래프 탐색,129326
-                            04,자료 구조,112730
-                            04,다이나믹 프로그래밍,108485
-                            */
-                            fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
-                            data: [
-                                557489,487943,266794,163517,129326,112730,108485 //x축 label에 대응되는 데이터 값
-                            ],
-                            backgroundColor: [
-                                //색상
-                                'rgba(255, 99, 132, 0.7)',
-                                'rgba(54, 162, 235, 0.7)',
-                                'rgba(255, 206, 86, 0.7)',
-                                'rgba(75, 192, 192, 0.7)',
-                                'rgba(150, 120, 180, 1)',
-                                'rgba(153, 102, 255, 0.7)',
-                                'rgba(128, 159, 64, 0.7)',
-                            ],
-                            borderColor: [
-                                //경계선 색상
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(150, 120, 180, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(128, 159, 64, 0.7)',
-                            ],
-                            borderWidth: 1 //경계선 굵기
-                        }
-                    ]
-                },
-                options:{
-                    legend:{
-                        position:'bottom',
-                        labels:{
-                            fontSize:12,
-                            boxWidth:1,
-                            fontColor:'white'
+                });   
+                var context2 = document
+                    .getElementById('myChart2')
+                    .getContext('2d');
+                var myChart2 = new Chart(context2, {
+                    type: 'doughnut', // 차트의 형태
+                    data: { // 차트에 들어갈 데이터
+                        labels:[res[6]['type'], res[7]['type'], res[8]['type'], res[9]['type'], res[10]['type'], res[11]['type']],
+                        datasets: [
+                            { 
+                                fill: false, // line 형태일 때, 선 안쪽을 채우는지 안채우는지
+                                data: [
+                                    res[6]['try'], res[7]['try'], res[8]['try'], res[9]['try'], res[10]['try'], res[11]['try']
+                                ],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(150, 120, 180, 1)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(150, 120, 180, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                ],
+                                borderWidth: 1 //경계선 굵기
+                            }
+                        ]
+                    },
+                    options:{
+                        legend:{
+                            position:'bottom',
+                            labels:{
+                                fontSize:13,
+                                boxWidth:1,
+                                fontColor:'white'
+                            }
                         }
                     }
-                }
-            });
+                });
+                    },
+                    error:(log)=>{alert("실패")}
+                })
+
+
+          
         </script>
     </body>
 
