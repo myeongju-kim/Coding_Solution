@@ -82,6 +82,7 @@
     border:none;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     background-size:300px;
+    background-color:white;
 }
 .com:active{
     box-shadow:none;
@@ -89,18 +90,33 @@
 #naver{
     background-image: url("image/naver.png");
 }
+#naverinf{
+    background-image: url("image/naverinf.png");
+}
 #kakao{
     background-image: url("image/kakao.png");
+}
+#kakaoinf{
+    background-image: url("image/kakaoinf.png");
 }
 #line{
     background-image: url("image/line.png");
 
 }
+#lineinf{
+    background-image: url("image/lineinf.png");
+}
 #coupang{
     background-image: url("image/coupang.png");
 }
+#coupanginf{
+    background-image: url("image/coupanginf.png");
+}
 #samsung{
     background-image: url("image/samsung.png");
+}
+#samsunginf{
+    background-image: url("image/samsunginf.png");
 }
 .bottom_com{
     position:relative;

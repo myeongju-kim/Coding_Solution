@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="useranalysis.css" rel="stylesheet" type="text/css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script src="https://code.jquery.com/jquery-latest.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <img id="title" src="image/main_icon.png">
+            <text id="title_text">coding. jumping</text>
+            <div class="mid_header">
+                <button class="btn" id="analysis">알고리즘 분석</button>
+                <button class="btn" id="study">스터디 그룹</button>
+                <button class="btn" id="company" onclick="location.href='company.html'">합격 예측</button>
+            </div>
+            <text id="my_id">mjoo1106</text>
+            </div>
+        </div>
+        <div class="top_com">
+            <div id="user_many">
+                <div id="test" style="width:550px; height:500px;">
+                    <canvas id="myChart" style="width:550px; height:500px;"></canvas> 
+                </div>
+            </div>
+            <div id="user_many">
+                <div id="test" style="width:550px; height:500px;">
+                    <canvas id="myChart2" style="width:550px; height:500px;"></canvas> 
+                </div>
+            </div>
+            <div id="user_many">
+                <div id="test" style="width:300px; height:300px;">
+                    <canvas id="myChart3" style="width:300px; height:300px;"></canvas> 
+                </div>
+            </div>
+        </div>
+        <div style="height:300px;"></div>
+        <script type="text/javascript">
+            $.ajax({
+                url: 'http://localhost:8000/analysis',
+                type: 'GET',
+                data: {'name':'mjoo1106'
+                },
+                dataType:"json",
+                success: (res) => {
+                    var context = document
+                    .getElementById('myChart')
+                    .getContext('2d');
+                    var myChart = new Chart(context, {
+                    type: 'bar', // 차트의 형태
+                    data: { // 차트에 들어갈 데이터
+                        labels:[res[0]['type'], res[1]['type'], res[2]['type'], res[3]['type'], res[4]['type'], 
+                        res[5]['type'], res[6]['type'], res[7]['type'], res[8]['type'], res[9]['type']],
+                        datasets: [
+                            { 
+                                data: [
+                                    Number(res[0]['try']), Number(res[1]['try']), Number(res[2]['try']), Number(res[3]['try']), Number(res[4]['try']), 
+                                    Number(res[5]['try']),  Number(res[6]['try']), Number(res[7]['try']), Number(res[8]['try']), Number(res[9]['try'])
+                                ],
+                                backgroundColor: [
+                                    //색상
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',
+                                ],
+                                borderColor: [
+                                    //경계선 색상
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',                         
+                                ],
+                                yAxisId:'A',
+                                borderWidth: 1 //경계선 굵기
+                            }
+                        ]
+                    },
+                    options:{
+                        title:{
+                            display:true,
+                            text: '사용자가 많이 푼 알고리즘',
+                            fontSize:30,
+                            fontColor:'black',
+                        },
+                        legend:'none',
+                        scales:{
+                            xAxes:[{
+                                ticks:{
+                                    fontColor : 'black',
+                                    fontSize : 16
+                                },
+                                gridLines:'none'
+                                    
+                            }]
+                        }
+                    }
+                });
+                var context = document
+                    .getElementById('myChart2')
+                    .getContext('2d');
+                    var myChart = new Chart(context, {
+                    type: 'line', // 차트의 형태
+                    data: { // 차트에 들어갈 데이터
+                        labels:[res[0]['type'], res[1]['type'], res[2]['type'], res[3]['type'], res[4]['type'], 
+                        res[5]['type'], res[6]['type'], res[7]['type'], res[8]['type'], res[9]['type']],
+                        datasets: [
+                            { 
+                                fill:false,
+                                data: [
+                                    Number(res[0]['ans']), Number(res[1]['ans']), Number(res[2]['ans']), Number(res[3]['ans']), Number(res[4]['ans']), 
+                                    Number(res[5]['ans']),  Number(res[6]['ans']), Number(res[7]['ans']), Number(res[8]['ans']), Number(res[9]['ans'])
+                                ],
+                                backgroundColor: [
+                                    //색상
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',
+                                ],
+                                borderColor: [
+                                    //경계선 색상
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',                         
+                                ],
+                                borderWidth: 4 //경계선 굵기
+                            }
+                        ]
+                    },
+                    options:{
+                        title:{
+                            display:true,
+                            text: '많이 푼 알고리즘 정답률',
+                            fontSize:30,
+                            fontColor:'black',
+                        },
+                        legend:'none',
+                        scales:{
+                            xAxes:[{
+                                ticks:{
+                                    fontColor : 'black',
+                                    fontSize : 16
+                                },
+                                gridLines:'none'
+                                    
+                            }]
+                        }
+                    }
+                });
+                var context3 = document
+                    .getElementById('myChart3')
+                    .getContext('2d');
+                var myChart2 = new Chart(context3, {
+                    type: 'pie', // 차트의 형태
+                    data: { // 차트에 들어갈 데이터
+                        labels:["정답률","오답률"],
+                        datasets: [
+                            { 
+                                data: [Number(res[10]),100-Number(res[10])],
+                                backgroundColor: [
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 99, 132, 0.7)',
+                                    
+                                ],
+                                borderColor: [
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 99, 132, 1)',
+ 
+                                ],
+                            }
+                        ]
+                    },
+                    options:{
+                        legend:{
+                            position:'bottom',
+                            labels:{
+                                fontSize:18,
+                                boxWidth:1,
+                                fontColor:'black'
+                            }
+                        },
+                        pieceLable:{
+                            fontSize:11,
+                            fontStyle:'bold'
+                        }
+                    }
+                });      
+                },
+                    error:(log)=>{alert("실패")}
+                })
+            </script>
+    </body>
+
+</html>
+

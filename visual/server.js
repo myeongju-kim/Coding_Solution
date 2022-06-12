@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/trend', (req, res) => {
-    console.log(req.query.cur);
+    //달 입력 받음
     const cur_mon=req.query.cur;
     const bef_mon=req.query.bef;
     const fs = require("fs");
@@ -85,6 +85,39 @@ app.get('/trend', (req, res) => {
     res.send(agt);
 });
 
+app.get('/analysis', (req, res) => {
+    //사용자 정보 요청
+    // algo_correct_stat_user.csv: [user, user_rank, type, totalsubmit, correct, wrong, correct_rate]
+    // algo_correct_stat_rankgroup.csv: [user_rank, type, totalsubmit, correct, wrong, correct_rate]입니다
+    const fs = require("fs");
+    const path=require("path");
+    const csvPath=path.join(__dirname,'analysis_data','algo_correct_stat_user.csv')
+    const csv=fs.readFileSync(csvPath,"utf-8")
+    const rows=csv.split("\n");
+    const user_rows=[]
+    var usum=0;
+    var total=0;
+    for(var i=0; i<rows.length; i++){
+        var temp=rows[i].split(",")
+        if(temp[0]=="mjoo1106"){
+            user_rows.push(temp)
+            total+=Number(temp[3])
+            usum+=Number(temp[4])
+        }
+    }
+
+   user_rows.sort(function(a,b){
+        return Number(b[3])-Number(a[3])
+    });
+    const apt=[]
+    for(var i=0; i<10; i++){
+        apt.push({"type":user_rows[i][2],
+                "try":user_rows[i][3],
+                "ans":Number(user_rows[i][6].slice(0,4))})
+    }
+    apt.push(Math.round((usum/total)*100))
+    res.send(apt);
+});
 
 app.listen(8000, () => {
     console.log('server is listening at localhost:8080');
