@@ -51,6 +51,7 @@
     left:1800px;
     top:-45px;
     color:white;
+    font-weight: bolder;
 }
 .top_com{
     position:relative;
@@ -125,7 +126,7 @@
     margin-left:-900px;
     background-image:url("image/company_bot.png");
     width:1800px;
-    height:350px;
+    height:450px;
     border-radius: 15px; 
 }
 .blank{

@@ -4,11 +4,15 @@
     <head>
         <meta charset="utf-8">
         <link href="company.css" rel="stylesheet" type="text/css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <script src="https://code.jquery.com/jquery-latest.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     </head>
     <body>
         <div class="header">
             <img id="title" src="image/main_icon.png">
-            <text id="title_text">coding. jumping</text>
+            <text id="title_text" style="font-family: 'Righteous', cursive;" onclick="location.href='main.html'">coding. jumping</text>
             <div class="mid_header">
                 <button class="btn" id="analysis" onclick="location.href='useranalysis.html'">알고리즘 분석</button>
                 <button class="btn" id="study">스터디 그룹</button>
@@ -21,19 +25,56 @@
             
         </div>
         <div class="company_icon">
-            <button class="com" id="naver"></button>
-            <button class="com" id="kakao"></button>
-            <button class="com" id="line"></button>
-            <button class="com" id="coupang"></button>
-            <button class="com" id="samsung"></button>
+            <button class="com" id="naver" onClick="percent(4)"></button>
+            <button class="com" id="kakao" onClick="percent(1)"></button>
+            <button class="com" id="line" onClick="percent(0)"></button>
+            <button class="com" id="coupang" onClick="percent(2)"></button>
+            <button class="com" id="samsung" onClick="percent(3)"></button>
             <button class="com" id="naverinf"></button>
             <button class="com" id="kakaoinf"></button>
             <button class="com" id="lineinf"></button>
             <button class="com" id="coupanginf"></button>
             <button class="com" id="samsunginf"></button>
         </div>
-        <div class="bottom_com"></div>
+        <div class="bottom_com" id="ok"></div>
         <div class="blank"></div>
+        <script>
+
+            function percent(n){
+                $.ajax({
+                    url: 'http://localhost:8000/company_analysis',
+                    type: 'GET',
+                    data: {'name':'mjoo1106'
+                    },
+                    success: (res) => {
+                        // l, k, c, s, n
+                        var pre_num=Number(res[n])
+                        if (pre_num>=85){
+                            var t="image/"+"85"+".png";
+                            document.getElementById("ok").style.backgroundImage=`url(${t})`;
+                        }
+                        else if(pre_num>=65){
+                            var t="image/"+"65"+String(n)+".png";
+                            document.getElementById("ok").style.backgroundImage=`url(${t})`;
+                        }
+                        else if(pre_num>=45){
+                            var t="image/"+"45"+String(n)+".png";
+                            document.getElementById("ok").style.backgroundImage=`url(${t})`;
+                        }
+                        else if(pre_num>=25){
+                            var t="image/"+"25"+String(n)+".png";
+                            document.getElementById("ok").style.backgroundImage=`url(${t})`;
+                        }
+                        else{
+                            var t="image/"+"10"+String(n)+".png";
+                            document.getElementById("ok").style.backgroundImage=`url(${t})`;
+                        }
+                    },
+                    error:(log)=>{alert("실패")}
+                })
+                
+            }
+        </script>
     </body>
 
 </html>
