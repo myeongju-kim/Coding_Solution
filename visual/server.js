@@ -180,10 +180,33 @@ app.get('/company_analysis', (req, res) => {
             arg.push(Math.round(Number(temp[i])*100))
         }
     }
-    console.log(arg);
     res.send(arg);
 });
-
+app.get('/study', (req, res) => {
+    // user|line_score1|line_score2|line_inferior|line_superior|line_acceptance_probability|
+    // kakao_score1|kakao_score2|kakao_inferior|kakao_superior|kakao_acceptance_probability|
+    // coupang_score1|coupang_score2|coupang_inferior|coupang_superior|coupang_acceptance_probability|
+    // samsung_score1|samsung_score2|samsung_inferior|samsung_superior|samsung_acceptance_probability|
+    // naver_score1|naver_score2|naver_inferior|naver_superior|naver_acceptance_probability
+    const fs = require("fs");
+    const path=require("path");
+    const csvPath=path.join(__dirname,'analysis_data','algo_correct_stat_user.csv')
+    const csv=fs.readFileSync(csvPath,"utf-8")
+    const rows=csv.split("\n");
+    var arg=[];
+    var sign=0;
+    for(var i=0; i<rows.length; i++){
+        var temp=rows[i].split(",")
+        if(temp[1]=="골드 2"){
+             if(arg.indexOf(temp[0])==-1)
+                arg.push(temp[0]);        
+        }
+        if(arg.length>=5)
+            break;
+    }
+  
+    res.send(arg);
+});
 app.listen(8000, () => {
     console.log('server is listening at localhost:8080');
 });
