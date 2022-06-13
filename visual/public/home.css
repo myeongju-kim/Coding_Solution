@@ -1,0 +1,192 @@
+body{
+    background-color: black;
+}
+.title{
+    position: relative;
+    top:250px;
+    left:30px;
+    width:1200px;
+    height:500px;
+    color:white;
+    font-size:100px;
+    z-index:2;
+}
+#sub{
+    position: relative;
+    top:-45px;
+    left:105px;
+    font-size:50px;
+}
+#myicon{
+    position: relative;
+    top:25px;
+    float:left;
+}
+#back{
+    position: relative;
+    top:-400px;
+    left:700px;
+    z-index:1;
+}
+#cimg{
+    position: relative;
+    left:700px;
+}
+.button-80 {
+    position: relative;
+    left:100px;
+    width:250px;
+    height:80px;
+    font-size:30px;
+    background: #fff;
+    backface-visibility: hidden;
+    border-radius: .375rem;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Circular,Helvetica,sans-serif;
+    font-weight: 700;
+    padding: .875rem 1.125rem;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    transition: transform .2s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-right:50px;
+}
+
+.button-80:not(:disabled):hover {
+    transform: scale(1.05);
+}
+
+.button-80:not(:disabled):hover:active {
+    transform: scale(1.05) translateY(.125rem);
+}
+
+.button-80:focus:before {
+  content: "";
+  left: calc(-1*.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1*.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+.button-80:focus:not(:focus-visible):before {
+  border-width: 0;
+}
+
+.button-80:not(:disabled):active {
+  transform: translateY(.125rem);
+}
+span {
+    position: absolute;
+    top: 860px;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-animation: sdb 2s infinite;
+    animation: sdb 2s infinite;
+    opacity: 0;
+    z-index:2;
+    box-sizing: border-box;
+  }
+span:nth-of-type(1) {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+  }
+span:nth-of-type(2) {
+    top: 876px;
+    -webkit-animation-delay: .15s;
+    animation-delay: .15s;
+  }
+span:nth-of-type(3) {
+    top: 892px;
+    -webkit-animation-delay: .3s;
+    animation-delay: .3s;
+  }
+  @-webkit-keyframes sdb {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes sdb {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+.content{
+    position: absolute;
+    top:1200px;
+    left:50%;
+    color:white;
+    margin-left:-700px;
+    width:1400px;
+    height:950px;
+}
+#why{
+    position: relative;
+    top:30px;
+    left:500px;
+    font-size:40px;
+}
+#change_div{
+    position:relative;
+    background-image:url("image/one.png");
+    width:1100px;
+    height:450px;
+    top:60px;
+    left:50%;
+    margin-left:-550px;
+}
+.btn{
+    border-radius: 10px;
+}
+#analysis{
+    position:relative;
+    top: 120px;
+    left:150px;
+    width:300px;
+    height:250px;
+    float:left;
+    background-image: url("image/btn1.png");
+    border: 1px solid white;
+}
+#study{
+    position:relative;
+    top: 120px;
+    left:250px;
+    width:300px;
+    height:250px;
+    background-image: url("image/btn2.png");
+    float:left;
+    border: 1px solid white;
+}
+#company{
+    position:relative;
+    top: 120px;
+    left:350px;
+    width:300px;
+    height:250px;
+    background-image: url("image/btn3.png");
+    float:left;
+    border: 1px solid white;
+}
