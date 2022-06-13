@@ -1,19 +1,46 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link href="login.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body>
-        <div class="header">
-            <img id="title" src="image/title.png">
-        </div>
-        <div class="login-form">
-            <form>
-              <input type="text" name="email" class="text-field" placeholder="아이디">
-              <input type="password" name="password" class="text-field" placeholder="비밀번호">
-              <input type="submit" value="로그인" class="submit-btn">
-            </form>
-         
-          </div>
-    </body>
-</html>
+<!doctype HTML>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="login.css">
+	<script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="main-container">
+		<div class="main-wrap">
+		<header>
+			<div class="sel-lang-wrap">
+				<select class="lang-select">
+					<option>English</option>
+					<option>한국어</option>
+				</select>
+			</div>
+
+		</header>
+		<section class="login-input-section-wrap">
+			<div class="login-input-wrap">	
+				<input placeholder="Username" type="text"></input>
+			</div>
+			<div class="login-input-wrap password-wrap">	
+				<input placeholder="Password" type="password"></input>
+			</div>
+			<div class="login-button-wrap">
+				<button onclick="location.href='main.html'">Sign in</button>
+			</div>
+			<div class="login-stay-sign-in">
+				<i class="far fa-check-circle"></i>
+				<span>Stay Signed in</span>
+			</div>
+		</section>
+		<section class="Easy-sgin-in-wrap">
+			<h2>Easier sign in</h2>
+			<ul class="sign-button-list">
+				<li><button><i class="fas fa-qrcode"></i><span>Sign in with QR code</span></button></li>
+				<li><button><i class="fab fa-facebook-square"></i><span>Facebook</span></button></li>
+				<li><button><i class="fab fa-line"></i><span>line</span></button></li>
+			</ul>
+			<p class="forget-msg">Forgot your Username or Password? | Sign up</p>
+		</section>
+
+		</div>
+	</div>
+</body>
