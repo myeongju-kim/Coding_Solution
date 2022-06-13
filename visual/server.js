@@ -89,6 +89,7 @@ app.get('/analysis', (req, res) => {
     //사용자 정보 요청
     // algo_correct_stat_user.csv: [user, user_rank, type, totalsubmit, correct, wrong, correct_rate]
     // algo_correct_stat_rankgroup.csv: [user_rank, type, totalsubmit, correct, wrong, correct_rate]입니다
+    const baekjoon_id=req.query.name;
     const fs = require("fs");
     const path=require("path");
     const csvPath=path.join(__dirname,'analysis_data','algo_correct_stat_user.csv')
@@ -97,10 +98,12 @@ app.get('/analysis', (req, res) => {
     const user_rows=[]
     var usum=0;
     var total=0;
+    var tier;
     for(var i=0; i<rows.length; i++){
         var temp=rows[i].split(",")
-        if(temp[0]=="mjoo1106"){
+        if(temp[0]==baekjoon_id){
             user_rows.push(temp)
+            tier=temp[1]
             total+=Number(temp[3])
             usum+=Number(temp[4])
         }
@@ -127,7 +130,7 @@ app.get('/analysis', (req, res) => {
     var total2=0;
     for(var i=0; i<rows2.length; i++){
         var temp2=rows2[i].split(",")
-        if(temp2[0]=="골드 3"){
+        if(temp2[0]==tier){
             user_rows2.push(temp2)
             total2+=Number(temp2[2])
             usum2+=Number(temp2[3])
@@ -160,6 +163,7 @@ app.get('/company_analysis', (req, res) => {
     // coupang_score1|coupang_score2|coupang_inferior|coupang_superior|coupang_acceptance_probability|
     // samsung_score1|samsung_score2|samsung_inferior|samsung_superior|samsung_acceptance_probability|
     // naver_score1|naver_score2|naver_inferior|naver_superior|naver_acceptance_probability
+    const baekjoon_id=req.query.name;
     const fs = require("fs");
     const path=require("path");
     const csvPath=path.join(__dirname,'analysis_data','user_with_acceptance_prediction.csv')
@@ -167,7 +171,7 @@ app.get('/company_analysis', (req, res) => {
     const rows=csv.split("\n");
     for(var i=0; i<rows.length; i++){
         var temp=rows[i].split(",")
-        if(temp[0]=="mjoo1106"){
+        if(temp[0]==baekjoon_id){
             break;
         }
     }
@@ -188,16 +192,35 @@ app.get('/study', (req, res) => {
     // coupang_score1|coupang_score2|coupang_inferior|coupang_superior|coupang_acceptance_probability|
     // samsung_score1|samsung_score2|samsung_inferior|samsung_superior|samsung_acceptance_probability|
     // naver_score1|naver_score2|naver_inferior|naver_superior|naver_acceptance_probability
+    const baekjoon_id=req.query.name;
+    const f = require("fs");
+    const pa=require("path");
+    const csvPa=pa.join(__dirname,'analysis_data','algo_correct_stat_user.csv')
+    const cs=f.readFileSync(csvPa,"utf-8")
+    const ro=cs.split("\n");
+    var tier;
+    const u_row=[];
+    for(var i=0; i<ro.length; i++){
+        var temp=ro[i].split(",")
+        if(temp[0]==baekjoon_id){
+            u_row.push(temp)
+            tier=temp[1]
+        }
+    }
+    u_row.sort(function(a,b){
+        return Number(b[3])-Number(a[3])
+    });
+
+
     const fs = require("fs");
     const path=require("path");
     const csvPath=path.join(__dirname,'analysis_data','algo_correct_stat_user.csv')
     const csv=fs.readFileSync(csvPath,"utf-8")
     const rows=csv.split("\n");
     var arg=[];
-    var sign=0;
     for(var i=0; i<rows.length; i++){
         var temp=rows[i].split(",")
-        if(temp[1]=="골드 2"){
+        if(temp[1]==tier){
              if(arg.indexOf(temp[0])==-1)
                 arg.push(temp[0]);        
         }

@@ -19,7 +19,7 @@
                 <button class="btn" id="study" onclick="location.href='group.html'">스터디 그룹</button>
                 <button class="btn" id="company" onclick="location.href='company.html'">합격 예측</button>
             </div>
-            <text id="my_id">mjoo1106</text>
+            <text id="my_id"></text>
             </div>
         </div>
         <div class="top_com"></div>
@@ -40,6 +40,7 @@
                     data: {'name':'mjoo1106'
                     },
                     success: (res) => {
+                        document.getElementById("my_id").innerHTML=res[0];
                         var usr_div=document.getElementById("user_many");
                         for(var i=0; i<5; i++){
                             var usr1=document.createElement('button')
@@ -49,9 +50,6 @@
                             usr_div.appendChild(usr1);
                             
                         }      
-                        document.getElementById("user_many").style.backgroundImage="url('image/rmstudy.png')"
-                        //user_div.style.backgroundImage="url('image/rmimage1.png')";
-                        //.style.backgroundImage="url('image/rmimage1.png')"    
                         $('.pT').click(function(){
                             Swal.fire({
                                 icon: 'send',

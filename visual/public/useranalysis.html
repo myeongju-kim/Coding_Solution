@@ -15,11 +15,11 @@
             <img id="title" src="image/main_icon.png">
             <text id="title_text" style="font-family: 'Righteous', cursive;" onclick="location.href='main.html'">coding. jumping</text>
             <div class="mid_header">
-                <button class="btn" id="analysis">알고리즘 분석</button>
-                <button class="btn" id="study">스터디 그룹</button>
+                <button class="btn" id="analysis" onclick="location.href='useranalysis.html'">알고리즘 분석</button>
+                <button class="btn" id="study" onclick="location.href='group.html'">스터디 그룹</button>
                 <button class="btn" id="company" onclick="location.href='company.html'">합격 예측</button>
             </div>
-            <text id="my_id">mjoo1106</text>
+            <text id="my_id"></text>
             </div>
         </div>
         <div class="top_com">
@@ -66,6 +66,7 @@
                 },
                 dataType:"json",
                 success: (res) => {
+                    document.getElementById("my_id").innerHTML=res[0];
                     var context = document
                     .getElementById('myChart')
                     .getContext('2d');
@@ -88,6 +89,12 @@
                                     'rgba(75, 192, 192, 0.7)',
                                     'rgba(153, 102, 255, 0.7)',
                                     'rgba(255, 159, 64, 0.7)',
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',
                                 ],
                                 borderColor: [
                                     //경계선 색상
@@ -96,7 +103,13 @@
                                     'rgba(255, 206, 86, 0.7)',
                                     'rgba(75, 192, 192, 0.7)',
                                     'rgba(153, 102, 255, 0.7)',
-                                    'rgba(255, 159, 64, 0.7)',                         
+                                    'rgba(255, 159, 64, 0.7)',   
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',                      
                                 ],
                                 yAxisId:'A',
                                 borderWidth: 1 //경계선 굵기
@@ -134,6 +147,7 @@
                         datasets: [
                             { 
                                 fill:false,
+                                label: "사용자",
                                 data: [
                                     Number(res[0]['ans']), Number(res[1]['ans']), Number(res[2]['ans']), Number(res[3]['ans']), Number(res[4]['ans']), 
                                     Number(res[5]['ans']),  Number(res[6]['ans']), Number(res[7]['ans']), Number(res[8]['ans']), Number(res[9]['ans'])
@@ -160,13 +174,13 @@
                             },
                             { 
                                 fill:false,
+                                label: "동일 티어",
                                 data: [
                                     Number(res[22]['ans']), Number(res[23]['ans']), Number(res[24]['ans']), Number(res[25]['ans']), Number(res[26]['ans']), 
                                     Number(res[27]['ans']),  Number(res[28]['ans']), Number(res[29]['ans']), Number(res[30]['ans']), Number(res[31]['ans'])
                                 ],
                                 backgroundColor: [
                                     //색상
-                                    'rgba(255, 99, 132, 0.7)',
                                     'rgba(54, 162, 235, 0.7)',
                                     'rgba(255, 206, 86, 0.7)',
                                     'rgba(75, 192, 192, 0.7)',
@@ -175,7 +189,6 @@
                                 ],
                                 borderColor: [
                                     //경계선 색상
-                                    'rgba(255, 99, 132, 0.7)',
                                     'rgba(54, 162, 235, 0.7)',
                                     'rgba(255, 206, 86, 0.7)',
                                     'rgba(75, 192, 192, 0.7)',
@@ -193,7 +206,6 @@
                             fontSize:30,
                             fontColor:'black',
                         },
-                        legend:'none',
                         scales:{
                             xAxes:[{
                                 ticks:{
@@ -317,6 +329,12 @@
                                     'rgba(75, 192, 192, 0.7)',
                                     'rgba(153, 102, 255, 0.7)',
                                     'rgba(255, 159, 64, 0.7)',
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',
                                 ],
                                 borderColor: [
                                     //경계선 색상
@@ -325,7 +343,13 @@
                                     'rgba(255, 206, 86, 0.7)',
                                     'rgba(75, 192, 192, 0.7)',
                                     'rgba(153, 102, 255, 0.7)',
-                                    'rgba(255, 159, 64, 0.7)',                         
+                                    'rgba(255, 159, 64, 0.7)',  
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',                       
                                 ],
                                 borderWidth: 4 //경계선 굵기
                             }
@@ -373,6 +397,12 @@
                                     'rgba(75, 192, 192, 0.7)',
                                     'rgba(153, 102, 255, 0.7)',
                                     'rgba(255, 159, 64, 0.7)',
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',
                                 ],
                                 borderColor: [
                                     //경계선 색상
@@ -381,7 +411,13 @@
                                     'rgba(255, 206, 86, 0.7)',
                                     'rgba(75, 192, 192, 0.7)',
                                     'rgba(153, 102, 255, 0.7)',
-                                    'rgba(255, 159, 64, 0.7)',                         
+                                    'rgba(255, 159, 64, 0.7)',    
+                                    'rgba(255, 99, 132, 0.7)',
+                                    'rgba(54, 162, 235, 0.7)',
+                                    'rgba(255, 206, 86, 0.7)',
+                                    'rgba(75, 192, 192, 0.7)',
+                                    'rgba(153, 102, 255, 0.7)',
+                                    'rgba(255, 159, 64, 0.7)',                     
                                 ],
                                 yAxisId:'A',
                                 borderWidth: 1 //경계선 굵기
@@ -408,9 +444,6 @@
                         }
                     }
                 });
-                //!!!!!!!!!!!!!
-                document.getElementById("user_many2").style.backgroundImage="url('image/rmimage1.png')"
-                document.getElementById("user_many4").style.backgroundImage="url('image/rmresult.png')"
                 
                 },
                     error:(log)=>{alert("실패")}

@@ -14,10 +14,10 @@
             <text id="title_text" style="font-family: 'Righteous', cursive;" onclick="location.href='main.html'">coding. jumping</text>
             <div class="mid_header">
                 <button class="btn" id="analysis" onclick="location.href='useranalysis.html'">알고리즘 분석</button>
-                <button class="btn" id="study">스터디 그룹</button>
+                <button class="btn" id="study" onclick="location.href='group.html'">스터디 그룹</button>
                 <button class="btn" id="company" onclick="location.href='company.html'">합격 예측</button>
             </div>
-            <text id="my_id">mjoo1106</text>
+            <text id="my_id"></text>
             <div id="grapic">
                 <div id="test" style="width:300px; height:300px;">
                     <canvas id="myChart"></canvas> 
@@ -26,9 +26,6 @@
                     <canvas id="myChart2" ></canvas>   
                 </div>
                 <img id="coding_image" src="image/login_homeimg.png">
-                <text id="g_text"><br>5월에는 시뮬레이션, 수학 문제가 가장 인기가 많네요!<br>
-                4월과 비교했을 때 "그래프 탐색"이 없어지고 "문자열" 문제가 새롭게 등장했어요.</text>
-
             </div>
         </div>
 
@@ -42,6 +39,7 @@
                 },
                 dataType:"json",
                 success: (res) => {
+                    document.getElementById("my_id").innerHTML=res[0];
                     var context = document
                     .getElementById('myChart')
                     .getContext('2d');

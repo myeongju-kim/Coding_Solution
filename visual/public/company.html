@@ -15,10 +15,10 @@
             <text id="title_text" style="font-family: 'Righteous', cursive;" onclick="location.href='main.html'">coding. jumping</text>
             <div class="mid_header">
                 <button class="btn" id="analysis" onclick="location.href='useranalysis.html'">알고리즘 분석</button>
-                <button class="btn" id="study">스터디 그룹</button>
+                <button class="btn" id="study" onclick="location.href='group.html'">스터디 그룹</button>
                 <button class="btn" id="company" onclick="location.href='company.html'">합격 예측</button>
             </div>
-            <text id="my_id">mjoo1106</text>
+            <text id="my_id"></text>
             </div>
         </div>
         <div class="top_com">
@@ -47,6 +47,7 @@
                     data: {'name':'mjoo1106'
                     },
                     success: (res) => {
+                        document.getElementById("my_id").innerHTML=res[0];
                         // l, k, c, s, n
                         var pre_num=Number(res[n])
                         if (pre_num>=85){
