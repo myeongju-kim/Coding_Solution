@@ -1,4 +1,6 @@
 const express = require('express');
+const WebHDFS=require("webhdfs");
+var request=require("request");
 const app = express();
 app.use(express.static(__dirname+ '/public'))
 app.get('/', (req, res) => {
@@ -6,13 +8,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/trend', (req, res) => {
-    //달 입력 받음
+    const url="your hdfs host name here";
+    const port=50070;
     const cur_mon=req.query.cur;
     const bef_mon=req.query.bef;
-    const fs = require("fs");
-    const path=require("path");
-    const csvPath=path.join(__dirname,'analysis_data','may.csv')
-    const csv=fs.readFileSync(csvPath,"utf-8")
+    const dir_path="/user/root/static/monthly_count/"+cur_mon;
+    const path="/webhdfs/v1/" + dir_path + "?op=LISTSTATUS&user.name=hdfs";
+    const csv=url+':'+port+path;
     const rows=csv.split("\n")
     const top1=rows[0].split(',')
     const top2=rows[1].split(',')
@@ -21,8 +23,9 @@ app.get('/trend', (req, res) => {
     const top5=rows[4].split(',')
     const top6=rows[5].split(',')
   
-    const csvPath2=path.join(__dirname,'analysis_data','april.csv')
-    const csv2=fs.readFileSync(csvPath2,"utf-8")
+    const dir_path2="/user/root/static/monthly_count/"+bef_mon;
+    const path2="/webhdfs/v1/" + dir_path2 + "?op=LISTSTATUS&user.name=hdfs";
+    const csv2=url+':'+port+path2;
     const rows2=csv2.split("\n")
     const top12=rows2[0].split(',')
     const top22=rows2[1].split(',')
@@ -90,10 +93,11 @@ app.get('/analysis', (req, res) => {
     // algo_correct_stat_user.csv: [user, user_rank, type, totalsubmit, correct, wrong, correct_rate]
     // algo_correct_stat_rankgroup.csv: [user_rank, type, totalsubmit, correct, wrong, correct_rate]입니다
     const baekjoon_id=req.query.name;
-    const fs = require("fs");
-    const path=require("path");
-    const csvPath=path.join(__dirname,'analysis_data','algo_correct_stat_user.csv')
-    const csv=fs.readFileSync(csvPath,"utf-8")
+    const url="your hdfs host name here";
+    const port=50070;
+    const dir_path="/user/root/static/stat_correct/algo_correct_stat_user"
+    const path="/webhdfs/v1/" + dir_path + "?op=LISTSTATUS&user.name=hdfs";
+    const csv=url+':'+port+path;
     const rows=csv.split("\n");
     const user_rows=[]
     var usum=0;
@@ -120,10 +124,10 @@ app.get('/analysis', (req, res) => {
     }
     apt.push(Math.round((usum/total)*100))
 
-    const fs2 = require("fs");
-    const path2=require("path");
-    const csvPath2=path2.join(__dirname,'analysis_data','algo_correct_stat_rankgroup.csv')
-    const csv2=fs2.readFileSync(csvPath2,"utf-8")
+
+    const dir_path2="/user/root/static/stat_correct/algo_correct_stat_rankgroup"
+    const path2="/webhdfs/v1/" + dir_path2 + "?op=LISTSTATUS&user.name=hdfs";
+    const csv2=url+':'+port+path2;
     const rows2=csv2.split("\n");
     const user_rows2=[]
     var usum2=0;
@@ -164,10 +168,11 @@ app.get('/company_analysis', (req, res) => {
     // samsung_score1|samsung_score2|samsung_inferior|samsung_superior|samsung_acceptance_probability|
     // naver_score1|naver_score2|naver_inferior|naver_superior|naver_acceptance_probability
     const baekjoon_id=req.query.name;
-    const fs = require("fs");
-    const path=require("path");
-    const csvPath=path.join(__dirname,'analysis_data','user_with_acceptance_prediction.csv')
-    const csv=fs.readFileSync(csvPath,"utf-8")
+    const url="your hdfs host name here";
+    const port=50070;
+    const dir_path="/user/root/static/stat_enterprise/user_with_acceptance_prediction"
+    const path="/webhdfs/v1/" + dir_path + "?op=LISTSTATUS&user.name=hdfs";
+    const csv=url+':'+port+path;
     const rows=csv.split("\n");
     for(var i=0; i<rows.length; i++){
         var temp=rows[i].split(",")
@@ -193,14 +198,15 @@ app.get('/study', (req, res) => {
     // samsung_score1|samsung_score2|samsung_inferior|samsung_superior|samsung_acceptance_probability|
     // naver_score1|naver_score2|naver_inferior|naver_superior|naver_acceptance_probability
     const baekjoon_id=req.query.name;
-    const f = require("fs");
-    const pa=require("path");
-    const csvPa=pa.join(__dirname,'analysis_data','algo_correct_stat_user.csv')
-    const cs=f.readFileSync(csvPa,"utf-8")
-    const ro=cs.split("\n");
+    const url="your hdfs host name here";
+    const port=50070;
+    const dir_path="/user/root/static/stat_correct/algo_correct_stat_user"
+    const path="/webhdfs/v1/" + dir_path + "?op=LISTSTATUS&user.name=hdfs";
+    const csv=url+':'+port+path;
+    const row=csv.split("\n");
     var tier;
     const u_row=[];
-    for(var i=0; i<ro.length; i++){
+    for(var i=0; i<row.length; i++){
         var temp=ro[i].split(",")
         if(temp[0]==baekjoon_id){
             u_row.push(temp)
@@ -211,12 +217,6 @@ app.get('/study', (req, res) => {
         return Number(b[3])-Number(a[3])
     });
 
-
-    const fs = require("fs");
-    const path=require("path");
-    const csvPath=path.join(__dirname,'analysis_data','algo_correct_stat_user.csv')
-    const csv=fs.readFileSync(csvPath,"utf-8")
-    const rows=csv.split("\n");
     var arg=[];
     for(var i=0; i<rows.length; i++){
         var temp=rows[i].split(",")
