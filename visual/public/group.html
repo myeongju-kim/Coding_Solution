@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="group.css" rel="stylesheet" type="text/css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <script src="https://code.jquery.com/jquery-latest.js"></script>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    </head>
+    <body>
+        <div class="header">
+            <img id="title" src="image/main_icon.png">
+            <text id="title_text" style="font-family: 'Righteous', cursive;" onclick="location.href='main.html'">coding. jumping</text>
+            <div class="mid_header">
+                <button class="btn" id="analysis" onclick="location.href='useranalysis.html'">알고리즘 분석</button>
+                <button class="btn" id="study" onclick="location.href='group.html'">스터디 그룹</button>
+                <button class="btn" id="company" onclick="location.href='company.html'">합격 예측</button>
+            </div>
+            <text id="my_id"></text>
+            </div>
+        </div>
+        <div class="top_com"></div>
+        <div class="content">
+            <div id="user_many"></div>    
+            <button class="com" id="ps1" onClick="join()"></button>
+            <button class="com" id="ps2" onClick="join()"></button>
+            <button class="com" id="ps3" onClick="join()"></button>
+            <button class="com" id="ps4" onClick="join()"></button>
+            <button class="com" id="ps5" onClick="join()"></button>
+            <button class="com" id="ps6" onClick="join()"></button>
+        </div>
+        <div class="blank"></div>
+        <script>
+              $.ajax({
+                    url: 'http://localhost:8000/study',
+                    type: 'GET',
+                    data: {'name':'mjoo1106'
+                    },
+                    success: (res) => {
+                        document.getElementById("my_id").innerHTML=res[0];
+                        var usr_div=document.getElementById("user_many");
+                        for(var i=0; i<5; i++){
+                            var usr1=document.createElement('button')
+                            usr1.setAttribute('id','pTag'+String(i+1));
+                            usr1.setAttribute('class','pT');
+                            usr1.innerHTML=res[i];
+                            usr_div.appendChild(usr1);
+                            
+                        }      
+                        $('.pT').click(function(){
+                            Swal.fire({
+                                icon: 'send',
+                                title: '발송 성공',
+                                text: "쪽지를 성공적으로 전송했습니다."
+                        })
+            })   
+                    },
+                    error:(log)=>{alert("실패")}
+                })
+
+            function join(){
+                Swal.fire({
+                    icon: 'join',
+                    title: '가입 성공',
+                    text: "스터디 그룹에 가입되었습니다."
+                })
+            }
+        </script>
+    </body>
+
+</html>
+

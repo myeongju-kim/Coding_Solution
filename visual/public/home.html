@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="home.css" rel="stylesheet" type="text/css"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="title">
+            <img id="myicon" src="image/icon.png">
+            <text style="font-family: 'Righteous', cursive;">Coding. Jumping</text>
+            <p id="sub">코딩 테스트를 효율적으로</p>
+            <input type="button" class="button-80" value="로그인" onclick="location.href='login.html'">
+            <input type="button" class="button-80" value="회원가입">
+        </div>
+        <img id="back" src="image/coding.png">
+        <span></span><span></span><span></span>
+        <div class="content">
+            <text id="why">'<text style="color:rgb(100,1,255);">코점</text>'을 해야하는 이유</text>
+            <div id="change_div"></div>
+            <button class="btn" id="analysis" onmouseover="on_hover(1)" onmouseout="on_out(1)"></button>
+            <button class="btn" id="study" onmouseover="on_hover(2)" onmouseout="on_out(2)"></button>
+            <button class="btn" id="company" onmouseover="on_hover(3)" onmouseout="on_out(3)"></button>
+        </div>
+        <script>
+            function on_hover(n){
+                if(n==1){
+                    btn=document.getElementById('analysis')
+                    btn.style.background="rgb(100,1,255)"
+                    btn.style.backgroundImage="url(image/btni1.png)"
+                    div=document.getElementById('change_div')
+                    div.style.backgroundImage="url(image/two.png)"
+                }
+                else if(n==2){
+                    btn=document.getElementById('study')
+                    btn.style.background="rgb(100,1,255)"
+                    btn.style.backgroundImage="url(image/btni2.png)"
+                    div=document.getElementById('change_div')
+                    div.style.backgroundImage="url(image/three.png)"
+                }
+                else{
+                    btn=document.getElementById('company')
+                    btn.style.background="rgb(100,1,255)"
+                    btn.style.backgroundImage="url(image/btni3.png)"
+                    div=document.getElementById('change_div')
+                    div.style.backgroundImage="url(image/four.png)"
+                }
+            }
+            function on_out(n){
+                if(n==1){
+                    btn=document.getElementById('analysis')
+                    btn.style.background="rgb(255,255,255)"
+                    btn.style.backgroundImage="url(image/btn1.png)"
+                }
+                else if(n==2){
+                    btn=document.getElementById('study')
+                    btn.style.background="rgb(255,255,255)"
+                    btn.style.backgroundImage="url(image/btn2.png)"
+                }
+                else{
+                    btn=document.getElementById('company')
+                    btn.style.background="rgb(255,255,255)"
+                    btn.style.backgroundImage="url(image/btn3.png)"
+                }
+            }
+        </script>
+    </body>
+
+</html>
+
